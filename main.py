@@ -92,21 +92,26 @@ def deduct_stock(c_choice):
 
 # TODO 7: Main function
 # Array to make sure the spelling is correct.
-all_options = ["espresso", "latte", "cappuccino", "report"]
-coffee_options = ["espresso", "latte", "cappuccino"]
-choice = input("What would you like? (espresso/latte/cappuccino): ")
+off = False
 
-if choice in all_options:
-    if choice in coffee_options:
-        if is_available(choice, resources):
-            if get_money(choice):
-                print(f"Here is your {choice} ☕️. Enjoy!")
-                deduct_stock(choice)
-                print("-------------------------------")
-                print_report()
+while not off:
+    all_options = ["espresso", "latte", "cappuccino", "report", "off"]
+    coffee_options = ["espresso", "latte", "cappuccino"]
+    choice = input("What would you like? (espresso/latte/cappuccino): ")
+
+    if choice in all_options:
+        if choice in coffee_options:
+            if is_available(choice, resources):
+                if get_money(choice):
+                    print(f"Here is your {choice} ☕️. Enjoy!")
+                    deduct_stock(choice)
+                    print("-------------------------------")
+                    print_report()
+            else:
+                print(f"Supply not in stock to provide a {choice}")
+        elif choice == "report":
+            print_report()
         else:
-            print(f"Supply not in stock to provide a {choice}")
+            off = True
     else:
-        print_report()
-else:
-    print("Your choice is not valid. ")
+        print("Your choice is not valid. ")
