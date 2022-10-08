@@ -1,4 +1,3 @@
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -31,18 +30,22 @@ resources = {
     "coffee": 100,
 }
 
+
 # TODO 1: Create reporting
 def print_report():
+    global money
+
     print(f"Water : {resources['water']}")
     print(f"Milk : {resources['milk']}")
     print(f"Coffee : {resources['coffee']}")
+    print(f"Money : {money}")
+
 
 # TODO 2: Get user request for 1 of 3 types
 
 
 # TODO 3: See if resources are sufficient
 def is_available(a_choice, resource):
-
     if a_choice == "latte" or a_choice == "cappuccino":
         if (MENU[a_choice]["ingredients"]["water"] > resource["water"]) or \
                 (MENU[a_choice]["ingredients"]["milk"] > resource["milk"]) or (
@@ -93,6 +96,7 @@ def deduct_stock(c_choice):
 # TODO 7: Main function
 # Array to make sure the spelling is correct.
 off = False
+money = 0.0
 
 while not off:
     all_options = ["espresso", "latte", "cappuccino", "report", "off"]
@@ -105,6 +109,7 @@ while not off:
                 if get_money(choice):
                     print(f"Here is your {choice} ☕️. Enjoy!")
                     deduct_stock(choice)
+                    money += MENU[choice]["cost"]
                     print("-------------------------------")
                     print_report()
             else:
